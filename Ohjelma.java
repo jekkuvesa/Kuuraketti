@@ -12,7 +12,7 @@ public class Ohjelma {
 
         double r = (2 * R * Mm - Math.sqrt(Math.pow(2 * R * Mm, 2) - 4 * Mm * Math.pow(R, 2) * (Mm - Mk))) / (2 * (Mm - Mk));
         double v0 = Math.sqrt(2 * G * ((-Mm) / r + Mk / (R - r) + Mm / (r0 + rm) - Mk / R));
-        double dt = 2; // aikaaskeleen valitseminen
+        double dt = 0.1; // aikaaskeleen valitseminen
         double t = 0.0;
         double v1 = v0 ;
         double RR = 384000000;
@@ -27,8 +27,8 @@ public class Ohjelma {
         r0 = 6471000;
         double v2;
         System.out.println("Aika minimilähtönopeudella ");
-        // looppi laskee aika-askeleen välein aluksen kiihtyvyyden(a), hetkellisen nopeuden(v2) ja kuljetun matkan(r0) maan keskipisteestä
-        // loopin lopussa aika ja matka lisätään vielä kahdelle listalle johon kaikki ajat ja nopeudet tallentuu 
+        // While-looppi laskee aika-askeleen välein aluksen kiihtyvyyden(a), hetkellisen nopeuden(v2) ja kuljetun matkan(r0)
+        // Looppi myös lisää ajan ja kuljetun matkan arvot omille listoilleen.
         
         // laskee minimialkunopeudella ajan ja matkan
         while (r0 < RR) {
@@ -39,7 +39,7 @@ public class Ohjelma {
             v1 += dt * a;
             aika2.add(t);
             matka2.add(r0);
-            //System.out.println("r0= "+r0+" v1= "+v1+" t= "+t);
+           
 
         }
         r0 = 6471000;
@@ -52,10 +52,10 @@ public class Ohjelma {
          
         System.out.println("");
         System.out.println("Aika nopeudella "+v1+" m/s");
-        // looppi laskee aika-askeleen välein aluksen kiihtyvyyden(a), hetkellisen nopeuden(v2) ja kuljetun matkan(r0) maan keskipisteestä
-        // loopin lopussa aika ja matka lisätään vielä kahdelle listalle johon kaikki ajat ja nopeudet tallentuu 
+        // Whilelooppi laskee aika-askeleen välein aluksen kiihtyvyyden(a), hetkellisen nopeuden(v2) ja kuljetun matkan(r0).
+        // Looppi myös lisää ajan ja kuljetun matkan arvot omille listoilleen.
         
-        // laskee 1.1 kertaisella miniminopeudella matkan ja ajan
+        // Laskee 1.1 kertaisella miniminopeudella matkan ja ajan
         while (r0 < RR) {
             a = -G * Mm / Math.pow(r0, 2) + G * Mk / Math.pow(RR - r0, 2);
             v2 = (v1 + dt * a);
@@ -64,7 +64,7 @@ public class Ohjelma {
             v1 += dt * a;
             aika.add(t);
             matka.add(r0);
-            //System.out.println("r0= "+r0+" v1= "+v1+" t= "+t);
+           
 
         }
         // kokonaisaika saadaan aika-listan viimeisestä indeksistä
